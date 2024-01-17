@@ -6,6 +6,11 @@ $baseUrl = "https://gis1.oit.ohio.gov/ZIPARCHIVES_III/ELEVATION/3DEP/LIDAR/"
 $lidarDirectory = "lidar"
 $tsvFilePath = "ogrip.tsv"
 
+if (!(Test-Path $tsvFilePath)) {
+    Write-Host "TSV file containing IDs does not exist"
+    Exit 1
+}
+
 # Parse TSV File
 $ids = Get-Content -Path $tsvFilePath
 $ids = $ids | ForEach-Object { $_.Split("`t")[0] }
